@@ -108,13 +108,18 @@ generate.biomarkers.tissue.boxplot <- function(
 			num.groups <- length(levels(plot.data.subset$group));
 
 			# set rectangle parameters
-			if (num.groups == 4) {
+			if (num.groups == 2) {
+				add.rectangle <- FALSE;
+			} else if (num.groups == 4) {
+				add.rectangle <- TRUE;
 				xright.rectangle <- 0;
 				xleft.rectangle <- 2.5;
 			} else if (num.groups == 6) {
+				add.rectangle <- TRUE;
 				xright.rectangle <- c(0,4.5);
 				xleft.rectangle <- c(2.5,6.5)
 			} else {
+				add.rectangle <- TRUE;
 				xright.rectangle <- c(0,seq(4.5,num.groups,4));
 				xleft.rectangle <- seq(2.5,num.groups+1,4);
 			}
@@ -143,7 +148,7 @@ generate.biomarkers.tissue.boxplot <- function(
 				add.stripplot = TRUE,
 				points.col = point.colours, 
 				symbol.cex = 0.25,
-				add.rectangle = TRUE,
+				add.rectangle = add.rectangle,
 				xright.rectangle = xright.rectangle,
 				xleft.rectangle = xleft.rectangle,
 				ybottom.rectangle = 0,
