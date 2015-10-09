@@ -74,6 +74,10 @@ extract.biomarkers.drug.response <- function(
 		# re factor variants to drop levels
 		associated.biomarkers.variants$Gene <- factor(associated.biomarkers.variants$Gene);
 
+		if (nrow(associated.biomarkers.variants) == 0) {
+			stop("No mutation variants associated with compound specified ...")
+		}
+
 		# for each gene find tissues that associated with listed diseases and pull out drug response for all those tissues	
 		drug.response.variants <- by(
 			associated.biomarkers.variants,
