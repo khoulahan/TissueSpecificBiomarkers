@@ -1,10 +1,14 @@
 generate.biomarkers.tissue.boxplot <- function(
 	plot.data,
 	output.dir,
+	dataset = 'CCLE',
 	width = 6
 	) {
 		# load library
 		library(BEST);
+
+		# set list
+		hypothesis.test.results <- list();
 
 		# set date
 		date <- Sys.Date();
@@ -51,7 +55,7 @@ generate.biomarkers.tissue.boxplot <- function(
 						gene = variant,
 						variant = NA,
 						association = 'none',
-						group = missing.levels
+						group = i
 						);
 					plot.data.subset <- rbind(plot.data.subset, tmp.row);
 				}
@@ -80,13 +84,26 @@ generate.biomarkers.tissue.boxplot <- function(
 					sep = ':'
 					);
 
-				# wilcox test
-				if (any(grepl('sensitivity|response', group1$association))) {
-					hypothesis <- 'greater';
-				} else if (any(grepl('none', group1$association))) {
-					hypothesis <- 'two.sided';
-				} else {
-					hypothesis <- 'less';
+				if (dataset == 'CCLE') {
+					# CCLE response is area above curve 
+					# therefore increased area = increased sensitivity and vice versa
+					if (any(grepl('sensitivity|^response', group1$association))) {
+						hypothesis <- 'greater';
+					} else if (any(grepl('none', group1$association))) {
+						hypothesis <- 'two.sided';
+					} else {
+						hypothesis <- 'less';
+					}
+				} else if (dataset %in% c('CTDD','Sanger')) {
+					# CTDD response is area under curve
+					# therefore increased area = increased resistance and vice versa 
+					if (any(grepl('sensitivity|^response', group1$association))) {
+						hypothesis <- 'less';
+					} else if (any(grepl('none', group1$association))) {
+						hypothesis <- 'two.sided';
+					} else {
+						hypothesis <- 'greater';
+					}
 				}
 				p.values <- wilcox.test(
 					group1$drug.response,
@@ -101,6 +118,17 @@ generate.biomarkers.tissue.boxplot <- function(
 					paste('u1-u2:', round(summary.BESTout['muDiff','median'], digits = 2)),
 					paste('HDI:', HDI.interval),
 					''
+					);
+
+				#store hypothesis testing results in list 
+				hypothesis.test.results[[paste(variant,tissue,sep='_')]] <- data.frame(
+					variant = variant,
+					tissue = tissue,
+					p.value = round(p.values, digits=4),
+					median.diff = round(summary.BESTout['muDiff','median'], digits = 2),
+					HDIlo = round(summary.BESTout['muDiff','HDIlo'], digits = 2),
+					HDIup = round(summary.BESTout['muDiff','HDIup'], digits = 2),
+					effect.size = round(summary.BESTout['effSz','median'], digits = 2)
 					);
 			}
 
@@ -185,4 +213,6 @@ generate.biomarkers.tissue.boxplot <- function(
 				resolution = 500
 				);
 		}
+	hypothesis.test.results <- do.call(rbind,hypothesis.test.results);
+	return(hypothesis.test.results);
 	}

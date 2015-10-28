@@ -6,7 +6,8 @@ generate.variant.drug.heatmap <- function(
 	drug.response,
 	map.tissue,
 	compounds,
-	filename,
+	filename = NULL,
+	plot = TRUE,
 	dataset = 'CCLE',
 	width = 5,
 	height = 7
@@ -50,19 +51,23 @@ generate.variant.drug.heatmap <- function(
 	# order heatmap data by most present genes
 	heatmap.plot.data <- heatmap.plot.data[,order(colSums(heatmap.plot.data))]
 
-	create.heatmap(
-		heatmap.plot.data,
-		filename,
-		clustering.method = 'none',
-		colour.scheme = c('white','seagreen'),
-		xaxis.lab = NA,
-		yaxis.lab = NA,
-		print.colour.key = FALSE,
-		xaxis.cex = 1.5,
-		grid.row = TRUE,
-		grid.col = TRUE,
-		width = width,
-		height = height,
-		resolution = 500
-		)
+	if (plot) {
+		create.heatmap(
+			heatmap.plot.data,
+			filename,
+			clustering.method = 'none',
+			colour.scheme = c('white','seagreen'),
+			xaxis.lab = NA,
+			yaxis.lab = NA,
+			print.colour.key = FALSE,
+			xaxis.cex = 1.5,
+			grid.row = TRUE,
+			grid.col = TRUE,
+			width = width,
+			height = height,
+			resolution = 500
+			);
+	}
+	# return matrix
+	return(heatmap.plot.data);
 }

@@ -1,47 +1,29 @@
 extract.biomarkers.drug.response <- function(
 	therapeutic.terms,
 	biomarkers,
-	mutations,
+	mutations = NULL,
+	cnv = NULL,
 	drug.response,
 	compound,
 	map.tissue,
-	dataset = 'CCLE'
+	dataset = 'CCLE',
+	variant.type = 'mutation'
 	) {
-
-		# define non silent mutations 
-		non.silent.mutations <- c(
-			'Frame_Shift_Del',
-			'Frame_Shift_Ins',
-			'Indel',
-			'In_Frame_Del',
-			'In_Frame_Ins',
-			'Missense_Mutation',
-			'Nonsense_Mutation',
-			'Splice_Site',
-			'Splice_Site_Del',
-			'Splice_Site_DNP',
-			'Splice_Site_Ins',
-			'Splice_Site_SNP',
-			'De_novo_Start_InFrame',
-			'De_novo_Start_OutOfFrame',
-			'Nonstop_Mutation',
-			'Start_Codon_Del',
-			'Stop_Codon_DNP',
-			'Stop_Codon_Ins'
-			);
 
 		# find terms in biomarkers that match compound of interest
 		if (dataset == 'CCLE') {
 			associated.biomarkers.terms <- therapeutic.terms[grep(compound, therapeutic.terms$AssociatedCompoundsCCLE),];
 			} else if (dataset == 'CTDD') {
 				associated.biomarkers.terms <- therapeutic.terms[grep(compound, therapeutic.terms$AssociatedCompoundsCTDD),];
+			} else if (dataset == 'Sanger') {
+				associated.biomarkers.terms <- therapeutic.terms[grep(compound, therapeutic.terms$AssociatedCompoundsSanger),];
 			} else {
-				stop("Please specify appropriate dataset. Either CCLE or CTDD ...")
+				stop("Please specify appropriate dataset. Either CCLE, CTDD or Sanger ...")
 			}
 
 		# if no associated terms, stop the function and report to user
 		if (nrow(associated.biomarkers.terms) == 0) {
-			stop("No therapeutic term in biomarkers associated with specified drug ...");
+			stop(paste("No therapeutic term in biomarkers associated with", compound,"..."));
 		}
 
 		# pull out variants associated with compound
@@ -69,13 +51,19 @@ extract.biomarkers.drug.response <- function(
 		associated.biomarkers.variants <- do.call(rbind, associated.biomarkers.variants);
 		# remove duplicated rows
 		associated.biomarkers.variants <- associated.biomarkers.variants[!duplicated(associated.biomarkers.variants),];
-		# keep only mutations, not rearrangements or amplifications
-		associated.biomarkers.variants <- associated.biomarkers.variants[!associated.biomarkers.variants$Variant %in% c('rearrangement','amplification'),];
+		# separate mutations from amplifications and rearrangments
+		if (variant.type == 'cnv') {
+			associated.biomarkers.variants <- associated.biomarkers.variants[associated.biomarkers.variants$Variant %in% c('amplification','deletion'),];
+		} else if (variant.type == 'mutation') {
+			associated.biomarkers.variants <- associated.biomarkers.variants[!associated.biomarkers.variants$Variant %in% c('rearrangement','amplification','splice variant mRNA','deletion'),];
+		} else {
+			stop("Please specify valid variant type. Options are 'mutation' or 'cnv'");
+		}
 		# re factor variants to drop levels
 		associated.biomarkers.variants$Gene <- factor(associated.biomarkers.variants$Gene);
 
 		if (nrow(associated.biomarkers.variants) == 0) {
-			stop("No mutation variants associated with compound specified ...")
+			stop(paste("No", variant.type, "variants associated with", compound, "..."));
 		}
 
 		# for each gene find tissues that associated with listed diseases and pull out drug response for all those tissues	
@@ -83,18 +71,31 @@ extract.biomarkers.drug.response <- function(
 			associated.biomarkers.variants,
 			associated.biomarkers.variants$Gene,
 			function(x) {
-				tissues <- unique(map.tissue[map.tissue$disease %in% x[,'Disease'],'tissue']);
+				tissues <- unique(map.tissue[map.tissue$disease %in% x[,'Disease'],grep(dataset, colnames(map.tissue))]);
 				gene <- as.character(unique(x$Gene));
-				# find which cell lines have variant
-				mutations.variants <- mutations[mutations$Hugo_Symbol == gene & mutations$Variant_Classification %in% non.silent.mutations,];
+				variant.cat <- max(as.character(x$Variant));
+				# check that gene is in mutations if not move onto next variant
+				if (variant.type == 'mutation' & !gene %in% colnames(mutations) | variant.type == 'cnv' & !gene %in% colnames(cnv)) {
+					return(NULL);
+				}
 				# get drug reponse of all tissues associated with gene of interest
 				associated.drug.response <- sapply(
 					tissues,
 					function(tissue) {
-						# find cell lines associated with tissue that have variant
-						cell.lines.variant <- as.character(
-							unique(mutations.variants[grep(tissue, mutations.variants$Tumor_Sample_Barcode),'Tumor_Sample_Barcode'])
-							);
+						if (variant.type == 'mutation') {
+							# find cell lines associated with tissue that have variant
+							cell.lines.variant <- rownames(mutations[mutations[,gene] == 1,])[grep(tissue, 
+								rownames(mutations[mutations[,gene] == 1,]), ignore.case = TRUE)];
+						} else if (variant.type == 'cnv') {
+							# find cell lines with amplification or deletion 
+							copy.number.variant <- round(2*(2^cnv[,gene]));
+							if (variant.cat == 'amplification') {
+								cell.lines.variant <- rownames(cnv)[which(copy.number.variant > 2)];
+							} else if (variant.cat == 'deletion') {
+								cell.lines.variant <- rownames(cnv)[which(copy.number.variant < 2)];
+							}
+							cell.lines.variant <- cell.lines.variant[grep(tissue, cell.lines.variant, ignore.case = TRUE)];
+						}
 						# only keep cell lines that have drug response
 						cell.lines.variant <- cell.lines.variant[cell.lines.variant %in% rownames(drug.response)];
 						# find cell lines associated with tissue that do not have variant
@@ -103,7 +104,7 @@ extract.biomarkers.drug.response <- function(
 
 						# find the most predominant therapeutic association 
 						therapeutic.association <- summary(
-							x[x$Disease %in% map.tissue[map.tissue$tissue == tissue,'disease'],'Association']
+							x[x$Disease %in% map.tissue[map.tissue[,grep(dataset, colnames(map.tissue))] == tissue,'disease'],'Association']
 							);
 						therapeutic.association <- names(therapeutic.association)[therapeutic.association == max(therapeutic.association)][1];
 
@@ -137,11 +138,21 @@ extract.biomarkers.drug.response <- function(
 				non.associated.tissues <- rownames(drug.response)[grep(associated.tissues, rownames(drug.response), 
 					invert = TRUE, ignore.case = TRUE)];
 				# find non associated cell lines with variant
-				cell.lines.variant <- as.character(
-					unique(
-						mutations.variants$Tumor_Sample_Barcode[mutations.variants$Tumor_Sample_Barcode %in% non.associated.tissues]
-						)
-					);
+				if (variant.type == 'mutation') {
+					# find cell lines not associated with tissue that have variant
+					cell.lines.variant <- rownames(mutations[mutations[,gene] == 1,])[rownames(
+						mutations[mutations[,gene] == 1,]) %in% non.associated.tissues];
+				} else if (variant.type == 'cnv') {
+					# find cell lines with amplification or deletion that are not associated with tissue
+					copy.number.variant <- round(2*(2^cnv[,gene]));
+					if (variant.cat == 'amplification') {
+						cell.lines.variant <- rownames(cnv)[which(copy.number.variant > 2)];
+					} else if (variant.cat == 'deletion') {
+						cell.lines.variant <- rownames(cnv)[which(copy.number.variant < 2)];
+					}
+					cell.lines.variant <- cell.lines.variant[cell.lines.variant %in% non.associated.tissues];
+				}
+
 				# find non associated cell lines without variant
 				cell.lines.no.variant <- non.associated.tissues[!non.associated.tissues %in% cell.lines.variant];
 
@@ -164,7 +175,7 @@ extract.biomarkers.drug.response <- function(
 					association = rep('none', length(c(cell.lines.variant, cell.lines.no.variant)))
 					);
 
-				rbind(associated.drug.response, non.associated.drug.response);
+				return(rbind(associated.drug.response, non.associated.drug.response));
 				}
 			);
 		drug.response.variants <- do.call(rbind, drug.response.variants);
