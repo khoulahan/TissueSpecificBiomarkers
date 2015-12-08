@@ -10,61 +10,15 @@ extract.biomarkers.drug.response <- function(
 	variant.type = 'mutation'
 	) {
 
-		# find terms in biomarkers that match compound of interest
-		if (dataset == 'CCLE') {
-			associated.biomarkers.terms <- therapeutic.terms[grep(compound, therapeutic.terms$AssociatedCompoundsCCLE),];
-			} else if (dataset == 'CTDD') {
-				associated.biomarkers.terms <- therapeutic.terms[grep(compound, therapeutic.terms$AssociatedCompoundsCTDD),];
-			} else if (dataset == 'Sanger') {
-				associated.biomarkers.terms <- therapeutic.terms[grep(compound, therapeutic.terms$AssociatedCompoundsSanger),];
-			} else {
-				stop("Please specify appropriate dataset. Either CCLE, CTDD or Sanger ...")
-			}
-
-		# if no associated terms, stop the function and report to user
-		if (nrow(associated.biomarkers.terms) == 0) {
-			stop(paste("No therapeutic term in biomarkers associated with", compound,"..."));
-		}
-
-		# pull out variants associated with compound
-		# need to iterate over all the therapeutic.response columns
-		associated.biomarkers.variants <- apply(
-			associated.biomarkers.terms,
-			1,
-			function(term) {
-				tmp.term <- term['BiomarkersTherapeuticTerm'];
-				tmp.list <- list();
-				for (i in 1:8) {
-					colnames.keep <- c(
-						'Disease',
-						'Gene',
-						'Variant',
-						paste('Association',i,sep='_'),
-						paste('Therapeutic.context',i,sep='_')
-						);
-					tmp.list[[i]] <- biomarkers[grep(tmp.term, biomarkers[,paste('Therapeutic.context', i, sep = '_')]), colnames.keep];
-					colnames(tmp.list[[i]]) <- c('Disease','Gene','Variant','Association','Therapeutic.context');
-					}
-				do.call(rbind, tmp.list);
-				}
+		# find all variants associated with specified compound
+		source('~/Documents/TissueSpecificBiomarkers/find_associated_variants.R');
+		associated.biomarkers.variants <- find.associated.variants(
+			compound,
+			biomarkers = biomarkers,
+			therapeutic.terms = therapeutic.terms,
+			dataset = dataset,
+			variant.type = variant.type
 			);
-		associated.biomarkers.variants <- do.call(rbind, associated.biomarkers.variants);
-		# remove duplicated rows
-		associated.biomarkers.variants <- associated.biomarkers.variants[!duplicated(associated.biomarkers.variants),];
-		# separate mutations from amplifications and rearrangments
-		if (variant.type == 'cnv') {
-			associated.biomarkers.variants <- associated.biomarkers.variants[associated.biomarkers.variants$Variant %in% c('amplification','deletion'),];
-		} else if (variant.type == 'mutation') {
-			associated.biomarkers.variants <- associated.biomarkers.variants[!associated.biomarkers.variants$Variant %in% c('rearrangement','amplification','splice variant mRNA','deletion'),];
-		} else {
-			stop("Please specify valid variant type. Options are 'mutation' or 'cnv'");
-		}
-		# re factor variants to drop levels
-		associated.biomarkers.variants$Gene <- factor(associated.biomarkers.variants$Gene);
-
-		if (nrow(associated.biomarkers.variants) == 0) {
-			stop(paste("No", variant.type, "variants associated with", compound, "..."));
-		}
 
 		# for each gene find tissues that associated with listed diseases and pull out drug response for all those tissues	
 		drug.response.variants <- by(

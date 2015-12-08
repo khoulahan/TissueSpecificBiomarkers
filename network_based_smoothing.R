@@ -1,11 +1,12 @@
 #### network-based smoothing ######################################################################
 # implementation of network based smoothing in R
 ###################################################################################################
-library(org.Hs.eg.db)
-library(annotate)
+suppressWarnings(suppressMessages(library(org.Hs.eg.db)));
+suppressWarnings(suppressMessages(library(annotate)));
+
 # read in human net network 
 humannet <- read.delim(
-	'~/Documents/Pathway/HumanNet.v1.benchmark.txt', 
+	'~/Documents/Pathway/HumanNet.v1.top10.txt', 
 	sep = '\t', 
 	header = FALSE
 	);
@@ -17,9 +18,6 @@ humannet[,2] <- getSYMBOL(as.character(humannet[,2]), data='org.Hs.eg');
 # convert to an adjacency matrix 
 humannet.adjacency <- as.matrix(table(humannet[,1], humannet[,2]));
 
-# convert adjacency matrix to transition matrix of probabilites
-humannet.transition <- humannet.adjacency/rowSums(humannet.adjacency);
-
 # read in mutations 
 mutations <- read.delim(
 	'~/Documents/Mutations/CCLE_mutation_featurematrix.tab',
@@ -29,13 +27,17 @@ mutations <- read.delim(
 # convert to matrix
 mutations <- as.matrix(mutations);
 
-# ensure genes in rows equal genes in columns of network
-humannet.transition <- humannet.transition[rownames(humannet.transition) %in% colnames(humannet.transition), 
-	colnames(humannet.transition) %in% rownames(humannet.transition)];
 # ensure rows (genes) of network are the same as genes in mutations matrix
-humannet.transition <- humannet.transition[rownames(humannet.transition) %in% colnames(mutations),];
+humannet.adjacency <- humannet.adjacency[rownames(humannet.adjacency) %in% colnames(mutations),];
+# ensure genes in rows equal genes in columns of network
+humannet.adjacency <- humannet.adjacency[rownames(humannet.adjacency) %in% colnames(humannet.adjacency), 
+	colnames(humannet.adjacency) %in% rownames(humannet.adjacency)];
 # keep only genes in network in mutation matrix
-mutations 			<- mutations[,colnames(mutations) %in% rownames(humannet.transition)];
+mutations <- mutations[,colnames(mutations) %in% rownames(humannet.adjacency)];
+
+# convert adjacency matrix to transition matrix of probabilites
+humannet.transition <- humannet.adjacency/rowSums(humannet.adjacency);
+humannet.transition[is.na(humannet.transition)] <- 0;
 
 #### NETWORK PROPOGATION ##########################################################################
 # initialize mat.norm at 1
@@ -56,7 +58,7 @@ while (mat.norm > 1e10^-6) {
 # write to file
 write.table(
 	x = F.mat,
-	file = '~/Documents/Mutations/2015-10-28_DiffusedMutationsCCLE.txt',
+	file = '~/Documents/Mutations/2015-10-28_DiffusedMutationsCCLETop10Humannet.txt',
 	sep = '\t',
 	quote = FALSE
 	);

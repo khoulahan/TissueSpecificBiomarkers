@@ -15,13 +15,15 @@ spec = matrix(c(
 	'output.dir',		'o',	2,	"character",
 	'parallel',			'p',	2,	"logicial",
 	'power',			'w',	2,	"logical",
-	'rep',				'r',	2,	"integer"	
+	'rep',				'r',	2,	"integer",
+	'cores',			'c',	2,	"integer"	
 	), byrow = TRUE, ncol = 4);
 opt = getopt(spec);
 
 if (is.null(opt$parallel)) {opt$parallel = TRUE}
 if (is.null(opt$power)) {opt$power = FALSE}
 if (is.null(opt$rep)) {opt$rep = 200}
+if (is.null(opt$cores)) {opt$cores = 3}
 
 ### READ IN DATA ##################################################################################
 drug.response <- read.delim(
@@ -38,8 +40,8 @@ mutations <- read.delim(
 #### TEST ASSOCIATIONS ############################################################################
 # set parallel background if parallel is set to true
 if (opt$parallel) {
-	cl <- makeCluster(3);
-	registerDoParallel(cl, cores = 3);
+	cl <- makeCluster(opt$cores);
+	registerDoParallel(cl, cores = opt$cores);
 	}
 # create function to be run in parallel
 calculate.drug.response.differences <- function(compound, variant, mutations, drug.response, repetitions = 200, power = FALSE) {
