@@ -14,10 +14,10 @@ find.associated.variants <- function(
 			associated.biomarkers.terms <- therapeutic.terms[grep(compound, therapeutic.terms$AssociatedCompoundsCCLE),];
 			} else if (dataset == 'CTDD') {
 				associated.biomarkers.terms <- therapeutic.terms[grep(compound, therapeutic.terms$AssociatedCompoundsCTDD),];
-			} else if (dataset == 'Sanger') {
-				associated.biomarkers.terms <- therapeutic.terms[grep(compound, therapeutic.terms$AssociatedCompoundsSanger),];
+			} else if (dataset == 'CGP') {
+				associated.biomarkers.terms <- therapeutic.terms[grep(compound, therapeutic.terms$AssociatedCompoundsCGP),];
 			} else {
-				stop("Please specify appropriate dataset. Either CCLE, CTDD or Sanger ...")
+				stop("Please specify appropriate dataset. Either CCLE, CTDD or CGP ...")
 			}
 
 		# if no associated terms, stop the function and report to user

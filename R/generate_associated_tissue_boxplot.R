@@ -1,4 +1,5 @@
-generate.biomarkers.tissue.boxplot <- function(
+### Generate Boxplot of All Associated Tissues vs Other Tissues ###########################################
+generate.associated.tissue.boxplot <- function(
 	plot.data,
 	output.dir,
 	dataset = 'CCLE',
@@ -94,7 +95,7 @@ generate.biomarkers.tissue.boxplot <- function(
 					} else {
 						hypothesis <- 'less';
 					}
-				} else if (dataset %in% c('CTDD','Sanger')) {
+				} else if (dataset %in% c('CTDD','CGP')) {
 					# CTDD response is area under curve
 					# therefore increased area = increased resistance and vice versa 
 					if (any(grepl('sensitivity|^response', group1$association))) {
