@@ -11,7 +11,7 @@ extract.biomarkers.drug.response <- function(
 	) {
 
 		# find all variants associated with specified compound
-		source('~/Documents/TissueSpecificBiomarkers/find_associated_variants.R');
+		source('find_associated_variants.R');
 		associated.biomarkers.variants <- find.associated.variants(
 			compound,
 			biomarkers = biomarkers,

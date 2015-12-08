@@ -172,7 +172,7 @@ generate.associated.tissue.boxplot <- function(
 					date,
 					'_',
 					variant,
-					'AllTissueBoxplot.tiff'
+					'SubsetTissueBoxplot.tiff'
 					),
 				add.stripplot = TRUE,
 				points.col = point.colours, 
