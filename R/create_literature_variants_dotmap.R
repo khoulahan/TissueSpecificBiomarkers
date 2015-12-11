@@ -115,7 +115,7 @@ create.literature.variants.dotmap <- function(
 		compounds.used <- rep(NA, nrow(map.drug.names));
 		for (i in 1:nrow(map.drug.names)) {
 			compounds.used[i] <- any(grepl(map.drug.names[i,'CCLE'], compound.colours));
-			compound.colours[grep(map.drug.names[i,'CCLE'], compound.colours)] <- map.drug.names[i,'Colour'];
+			compound.colours[grep(map.drug.names[i,'CCLE'], compound.colours)] <- as.character(map.drug.names[i,'Colours']);
 		}
 		# create covariates
 		covariate <- list(
