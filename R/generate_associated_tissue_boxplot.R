@@ -1,4 +1,12 @@
 ### Generate Boxplot of All Associated Tissues vs Other Tissues ###########################################
+# generate boxplot of all individual tissues associated with given drug in literature file
+# generates one plot for each variant associated with the specified compound in the plot data matrix
+## Arguments:
+## plot.data		Plot data matrix as outputted by extract_biomarkers_drug_response.R
+## output.dir		Directory plots will be outputted to
+## dataset			Dataset to analyze
+## width			Width of plot
+###################################################################################################
 generate.associated.tissue.boxplot <- function(
 	plot.data,
 	output.dir,
@@ -7,12 +15,10 @@ generate.associated.tissue.boxplot <- function(
 	) {
 		# load library
 		library(BEST);
-
-		# set list
-		hypothesis.test.results <- list();
-
 		# set date
 		date <- Sys.Date();
+		# set list
+		hypothesis.test.results <- list();
 
 		# create group for plotting by combining tissue and variant information 
 		plot.data$group <- apply(

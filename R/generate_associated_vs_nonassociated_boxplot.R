@@ -1,5 +1,11 @@
 ### Generate Boxplot of Associated vs Non-Associated Tissues ######################################
 # groups all associated tissues into one category in an effort to increase power
+# creates one boxplot for each variant associated with compound in plot data matrix
+## Arguments:
+## plot.data		Plot data matrix as outputted by extract_biomarkers_drug_response.R
+## output.dir		Directory plots will be outputted to
+## dataset			Dataset to analyze
+## width			Width of plot
 ###################################################################################################
 generate.associated.vs.nonassociated.boxplot <- function(
 	plot.data,

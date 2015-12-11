@@ -1,4 +1,18 @@
 #### generate variant drug association heatmap ####################################################
+# generates heatmap showing variants each drug is associated with in the biomarkers file
+## Arguments:
+## therapeutic.terms	File mapping therapeutic terms in biomarkers file to drug names in each dataset
+## biomarkers			Literature cultivated biomarkers file
+## mutations			Mutations features matrix; binary matrix sample by gene
+## drug response		Drug response feature matrix; sample by compound
+## map.tissue			File mapping disease in biomarkers file to tissue specification in each dataset
+## compounds			Compounds to include in plot
+## filename				Filename to write plot to
+## plot					Logical indicating whether to plot heatmap or just return plot data
+## dataset				The dataset to analyze
+## width				Width of plot
+## height				Height of plot
+###################################################################################################
 generate.variant.drug.heatmap <- function(
 	therapeutic.terms,
 	biomarkers,
