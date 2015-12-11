@@ -91,8 +91,11 @@ create.literature.variants.dotmap <- function(
 			max.effect.size,
 			decreasing = TRUE)];
 		# order compounds as in map drug names file so that similar mode of actions are adjacent
-		effect.size <- effect.size[rownames(effect.size) %in% map.drug.names$CCLE,];
-		pvalues 	<- pvalues[rownames(effect.size) %in% map.drug.names$CCLE,];
+		compounds.order <- sapply(as.character(map.drug.names$CCLE), function(x) { grep(x, rownames(effect.size))});
+		compounds.order <- unlist(compounds.order)
+
+		effect.size <- effect.size[compounds.order,];
+		pvalues 	<- pvalues[compounds.order,];
 
 		### SPOT COLOUR FUNCTION ###
 		spot.colour.function <- function(x) {
@@ -109,6 +112,7 @@ create.literature.variants.dotmap <- function(
 		tissue.colours[grep('Associated', tissue.colours)] <- default.colours(2, palette.type = 'spiral.sunrise')[2];
 		# compound covariate colours
 		compound.colours <- rownames(pvalues);
+		compounds.used <- rep(NA, nrow(map.drug.names));
 		for (i in 1:nrow(map.drug.names)) {
 			compounds.used[i] <- any(grepl(map.drug.names[i,'CCLE'], compound.colours));
 			compound.colours[grep(map.drug.names[i,'CCLE'], compound.colours)] <- map.drug.names[i,'Colour'];
