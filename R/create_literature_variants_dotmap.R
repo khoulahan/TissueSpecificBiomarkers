@@ -145,8 +145,8 @@ create.literature.variants.dotmap <- function(
 				title = 'Tissue'
 				),
 			legend = list(
-				colours = map.drug.names[compounds.used,'Colours'],
-				labels = map.drug.names[compounds.used,'CCLE'],
+				colours = as.character(map.drug.names[compounds.used,'Colours']),
+				labels = as.character(map.drug.names[compounds.used,'CCLE']),
 				cex = 1,
 				title = 'Compounds'
 				)
@@ -238,7 +238,7 @@ create.literature.variants.dotmap <- function(
 				substitute(p.value<=10^-5, list(p.value = ''))
 				),
 			legend = list(
-				right = list(       
+				right = list(
 					fun = right.grob
 					),
 				left = list(
@@ -255,7 +255,7 @@ create.literature.variants.dotmap <- function(
 					        )
 						),
 					x = x.legend,
-					y = y
+					y = y.legend
 					)
 				),
 			axis.bottom = 1.05,
