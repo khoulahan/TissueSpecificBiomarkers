@@ -4,7 +4,16 @@
 ## background shading indicates FDR
 ## covariates indicating if result is in tissue reported in literature or non-reported tissues
 ## covariates also show compound analyzed
-library(BoutrosLab.plotting.general);
+### Arguments:
+### hypothesis.results		Hypothesis results file formed as aggregate from generate_associated_vs_nonassociated_boxplot.R
+### map.drug.names			File mapping drug names in each dataset as well specifies associated colour
+### filename				Filename to output plot to
+### dataset					Dataset to plot
+### width					Width of plot
+### height 					Height of plot
+### x.legend				X-coordinate of "FDR" label
+### y.legend				Y-coordinate of "FDR" label
+### spot.size.function		Function to determine spot size for dotmap
 ###################################################################################################
 create.literature.variants.dotmap <- function(
 	hypothesis.results, 
@@ -15,7 +24,7 @@ create.literature.variants.dotmap <- function(
 	height = 6,
 	x.legend = -0.2,
 	y.legend = -0.28,
-	spot.size.function = function(x) { 0.5 + (1.2 * abs(x)); }
+	spot.size.function = function(x) { 0.5 + (1.2 * abs(x)) }
 	) {
 
 		# add dataset column 
@@ -27,12 +36,12 @@ create.literature.variants.dotmap <- function(
 			hypothesis.results[hypothesis.results$dataset == 'CCLE','effect.size'] <- hypothesis.results[hypothesis.results$dataset == 'CCLE','effect.size']*(-1)
 		} else if (dataset == 'CTDD') {
 			# change all drug names to match CCLE
-			hypothesis.results$compound <- unlist(sapply(hypothesis.results$compound, function(x) {
+			hypothesis.results$compound <- unlist(sapply(as.character(hypothesis.results$compound), function(x) {
 				map.drug.names[map.drug.names$CTDD == x & !is.na(map.drug.names$CTDD),'CCLE'];
 				}))
 		} else if (dataset == 'CGP') {
 			# change all drug names to match CCLE
-			hypothesis.results$compound <- unlist(sapply(hypothesis.results$compound, function(x) {
+			hypothesis.results$compound <- unlist(sapply(as.character(hypothesis.results$compound), function(x) {
 				map.drug.names[map.drug.names$CGP == x & !is.na(map.drug.names$CGP),'CGP']
 				}))
 		}

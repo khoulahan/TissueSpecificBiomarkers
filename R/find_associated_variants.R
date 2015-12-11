@@ -1,5 +1,11 @@
 ### find_associated_variants.R ####################################################################
 # find all variants associated with specified drug and return in a more condensed format 
+## Arguments:
+## compound				Compound to analyze
+## biomarkers			Literature cultivated biomarkers file
+## therapeutic.terms	File mapping therapeutic terms in biomarkers file to drug names in each dataset
+## dataset				The dataset to analyze
+## variant.type			Variant type to analyze; options are 'mutation' or 'cnv'
 ###################################################################################################
 find.associated.variants <- function(
 	compound, 

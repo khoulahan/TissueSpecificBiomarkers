@@ -1,3 +1,19 @@
+### extract_biomarkers_drug_response.R ############################################################
+# extract drug response of cell lines with variant for all variants associated with specified
+# compound in the literature biomarkers file
+## Arguments:
+## therapeutic.terms		File mapping therapeutic terms in biomarkers file to drug names in each dataset
+## biomarkers				Literature cultivated biomarkers file
+## mutations				Mutations features matrix; binary matrix sample by gene; required if variant.type = 'mutation'
+## cnv						CNV feature matrix; sample by gene; required if variant.type = 'cnv'
+## drug.response			Drug response feature matrix; sample by compound
+## compound					Compound to analyze
+## map.tissue				File mapping disease in biomarkers file to tissue specification in each dataset
+## dataset					The dataset to analyze
+## variant.type				Variant type to analyze; options are 'mutation' or 'cnv'
+## additional.variant		vector of gene names to test on every drug regardless if associated in 
+##							literature
+###################################################################################################
 extract.biomarkers.drug.response <- function(
 	therapeutic.terms,
 	biomarkers,
