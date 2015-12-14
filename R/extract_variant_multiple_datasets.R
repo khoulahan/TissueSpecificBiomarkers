@@ -8,7 +8,7 @@
 ##							pathway should be included 
 ## network					pathway network to use if neighbour.variants set as TRUE
 ###################################################################################################
-extract.multiple.datasets <- function(compound.dataset.grid, additional.variant, neighbour.variants = FALSE, network = NULL) {
+extract.variant.multiple.datasets <- function(compound.dataset.grid, additional.variant = NULL, neighbour.variants = FALSE, network = NULL) {
 	plot.data <- list();
 	for (i in 1:nrow(compound.dataset.grid)) {
 		# set mutation profile and drug response profile
