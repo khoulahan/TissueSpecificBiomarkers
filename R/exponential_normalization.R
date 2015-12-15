@@ -13,5 +13,5 @@ exponential.normalization <- function(gene.expression) {
 			dexp(sample);
 			}
 		);
-	return(normalized.gene.expression);
+	return(t(normalized.gene.expression));
 }
