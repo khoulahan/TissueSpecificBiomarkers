@@ -1,0 +1,67 @@
+disease	CCLE;CTDD	Sanger	TissueGroup
+1	ALL	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+2	CML	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+3	Ovarian	OVARY	urogenital_system	urogenital_system
+4	Breast	BREAST	breast	breast
+5	Cancer	ALL	all	all
+6	Fibrous Histiocytoma	BONE	bone	bone
+7	Melanoma	SKIN	skin	skin
+8	Inflammatory_myofibroblastic_tumor	ALL	all	all
+9	Lung_adeno	LUNG	lung	lung
+10	Lymphoma	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+11	Thyroid	THYROID	thyroid	thyroid
+12	Brain	CENTRAL_NERVOUS_SYSTEM	nervous_system	nervous_system
+13	Colorectal	LARGE_INTESTINE	digestive_system	digestive_system
+14	Prostate	PROSTATE	urogenital_system	urogenital_system
+15	Gastric	STOMACH	digestive_system	digestive_system
+16	Renal	KIDNEY	kidney	kidney
+17	GIST	STOMACH	digestive_system	digestive_system
+18	Hairy cell leukemia	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+19	Myeloma	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+20	Pancreatic	PANCREAS	pancreas	pancreas
+21	NUT midline carcinoma	EPITHELIAL	epithelial	epithelial
+22	CLL	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+23	Mantle cell lymphoma	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+24	MPN	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+25	Liposarcomas	SOFT_TISSUE	soft_tissue	soft_tissue
+26	Dermatofibrosarcoma protuberans	SKIN	skin	skin
+27	Atypical CML, CNL	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+28	Endometrial	ENDOMETRIUM	urogenital_system	urogenital_system
+29	Lung_squamous	LUNG	lung	lung
+30	AML	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+31	Head Neck	UPPER_AERODIGESTIVE_TRACT	aero_digestive_tract	aero_digestive_tract
+32	Lung_adeno_squamous	LUNG	lung	lung
+33	Esophageal	OESOPHAGUS	aero_digestive_tract	aero_digestive_tract
+34	Urothelial	URINARY_TRACT	urogenital_system	urogenital_system
+35	Biliary	BILIARY_TRACT	digestive_system	digestive_system
+36	Rhabdomyosarcoma	SOFT_TISSUE	soft_tissue	soft_tissue
+37	Cervical	CERVICAL	urogenital_system	urogenital_system
+38	Malignant Rhabdoid Tumor	KIDNEY	kidney	kidney
+39	Myelofibrosis	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+40	Megakaryoblastic leukemia	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+41	Natural killer T cell lymphoma	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+42	Thymic	THYMIC	thymic	thymic
+43	Systemic mastocytosis	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+44	Hepatocellular carcinoma	LIVER	digestive_system	digestive_system
+45	Sarcoma	SOFT_TISSUE	soft_tissue	soft_tissue
+46	Angiosarcoma	SOFT_TISSUE	soft_tissue	soft_tissue
+47	Neuroblastoma	CENTRAL_NERVOUS_SYSTEM	nervous_system	nervous_system
+48	MPNST, leukemia	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+49	Mesothelioma	LUNG;STOMACH	lung;digestive_system	lung;digestive_system
+50	Schwannoma	CENTRAL_NERVOUS_SYSTEM	nervous_system	nervous_system
+51	Meningioma, Schwannoma, PEComa	CENTRAL_NERVOUS_SYSTEM	nervous_system	nervous_system
+52	Hypereosinophilic syndrome	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+53	Hypereosinophilic syndrome, CEL	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+54	MDS, MPD	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+55	Basal cell carcinoma	SKIN	skin	skin
+56	Medulloblastoma	CENTRAL_NERVOUS_SYSTEM	nervous_system	nervous_system
+57	Retinoblastoma	RETINA	retina	retina
+58	CLL, mantle cell lymphoma	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+59	Thymic_Lymphoma	HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	blood	blood
+60	Angiomyolipoma, PEComa	KIDNEY	kidney	kidney
+61	Lymphangioleiomyomatosis	LUNG	lung	lung
+62	NA	AUTONOMIC_GANGLIA	nervous_system	nervous_system
+63	NA	PLEURA	aero_digestive_tract	aero_digestive_tract
+64	NA	SALIVARY_GLAND	aero_digestive_tract	aero_digestive_tract
+65	NA	SMALL_INTESTINE	digestive_system	digestive_system
+

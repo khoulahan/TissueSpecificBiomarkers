@@ -1,0 +1,129 @@
+BiomarkersTherapeuticTerm	Function	AssociatedCompoundsCCLE	AssociatedCompoundsCTDD	AssociatedCompoundsSanger	AssociatedColour
+crizotinib	ALK inhibitor	PF2341066;crizotinib	crizotinib	NA	#2D9B1C
+ceritinib	ALK inhibitor	NA	NA	NA	#2D9B1C
+alectinib	ALK inhibitor	NA	NA	NA	#2D9B1C
+sorafenib	Multi-target protein kinase inhibitor	Sorafenib 	sorafenib	Sorafenib	#FA6BEF
+EGFR TKIs	EGFR TKI	Erlotinib;Lapatinib	cyanoquinoline.11;neratinib;tyrphostin.AG.1478;afatinib;canertinib;WZ8040;lapatinib;WZ4002;PD.153035;erlotinib	Erlotinib;Gefitnib;Lapatinib;BIBW2992	#D43608
+dasatinib	Bcr-Abl TKI	NA	NA	Dasatinib	NA
+erlotinib	EGFR TKI	Erlotinib	erlotinib	Erlotinib	#D43608
+afatinib	EGFR/HER2 TKI	NA	afatinib	BIBW2992	#D43608
+irreversible EGFR T790M inhibitors	irreversible EGFR T790M inhibitor	NA	NA	NA	NA
+first-generation and irreversible EGFR TKIs	EGFR TKI	Erlotinib;Lapatinib	cyanoquinoline.11;neratinib;tyrphostin.AG.1478;erlotinib	Erlotinib;Gefitnib;Lapatinib;BIBW2992	#D43608
+mTOR inhibitors	mTOR inhibitor	NA	PI.103;PIK.90;PP.30;sirolimus;BEZ235	JW.7.52.1;NVP.BEZ235;Rapamycin;Temsirolimus;AZD8055	#B2F0ED
+PARP inhibitors	PARP inhibitor	NA	PJ.34;rucaparib;veliparib;X3.aminobenzamide;AG14361;NU.1025;olaparib	ABT.888;AG.014699;AZD.2281	#461234
+FGFR inhibitors	FGFR inhibitor	TKI258	NA	PD.173074	#E9A468
+PI3K pathway inhibitors	PI3K pathway inhibitor	NA	BEZ235;Compound.110;PI.103;PIK.75;PIK.90;TGX.115	TGX221;AZD6482;GDC0941;NVP.BEZ235	#C3FB13
+cabozantinib	c-Met and VEGFR2 inhibitor	NA	cabozantinib	NA	NA
+vandetanib	VEGFR and EGFR inhibitor	ZD.6474;vandetanib	vandetanib	NA	#783360
+SRC inhibitors	SRC inhibitor	AZD0530;saracatinib	saracatinib	A.770041;AZD.0530;Bosutinib;Dastinib;WH.4.023	#F7436C
+ALK inhibitors	ALK inhibitor	PF2341066;crizotinib;TAE684	LDN.193189;crizotinib;NVP.TAE684	NVP.TAE684;PF.02341066	#2D9B1C
+dabrafenib	BRAF inhibitor	NA	dabrafenib	NA	#32AF81
+cetuximab	EGFR inhibitor	NA	NA	NA	#D43608
+HSP90 inhibitors	HSP90 inhibitor	X17.AAG	NVP.AUY922;SNX.2112;tanespimycin	X17.AAG;AUY922;CCT018159	#2C3A85
+cisplatin	Interchalating agent	NA	NA	Cisplatin	NA
+MEK inhibitors	MEK inhibitor	AZD6244;PD.0325901;selumetinib;PD0325901	selumetinib;PD318088;trametinib	PD.0325901;RDEA119;AZD6244;CI.1040	#445C0F
+RET inhibitors	RET inhibitor	NA	regorafenib	AMG.706;CEP.701	#6B57D3
+vemurafenib	BRAF inhibitor	NA	P.0850	NA	#32AF81
+BET inhibitors	BET inhibitor	NA	JQ.1	NA	NA
+IGF1R inhibitors	IGF1R inhibitor	AEW541;NVP-AEW541	BMS.536924;BMS.754807;linsitinib	BMS.536924;BMS.754807;GSK.1904529A;OSI.906	#8ECBFE
+trametinib	MEK inhibitor	NA	NA	NA	#445C0F
+CDK4 inhibitors	CDK4 inhibitor	PD.0332991;PD0332991	alvocidib;PHA.793887	CGP.082996;PD.0332991	#C47A0C
+JAK/TBK1/IKK? inhibitor	JAK/TBK1/IKK? inhibitor	NA	TG.101348;BX.795	NA	NA
+FAK inhibitors	FAK inhibitor	NA	NA	PF.562271	NA
+nilotinib	TKI	Nilotinib	nilotinib	Nilotinib	#B3F7C0
+ponatinib	TKI	NA	NA	NA	#B3F7C0
+bosutinib	TKI	NA	NA	Bosutinib	#B3F7C0
+AKT inhibitors	AKT inhibitor	NA	MK.2206;10.DEBC	MK.2206;A.443654	NA
+everolimus	mTOR inhibitor	NA	NA	NA	#B2F0ED
+BRAF inhibitors	BRAF inhibitor	PLX4720;RAF265	P.0850;dabrafenib;GDC.0879;PLX.4720;regorafenib;PLX.4032;RAF265	PLX4720;SB590885;AZ628	#32AF81
+tankyrase inhibitors	tankyrase inhibitor	NA	XAV.939	NA	NA
+enzalutamide	AR signaling inhibitor	NA	NA	NA	NA
+ARN-509	AR inhibitor	NA	NA	NA	NA
+flutamide	AR inhibitor	NA	flutamide	NA	NA
+bicalutamide	AR inhibitor	NA	NA	Bicalutamide	NA
+AR antagonists	AR antagonist	NA	flutamide;MDV.3100;pyrvinium.pamoate;BMS.641988	NA	NA
+EZH2 inhibitor	EZH2 inhibitor	NA	NA	NA	NA
+abiraterone	AR inhibitor	NA	NA	NA	NA
+temozolomide	Alklylating agent	NA	NA	NA	NA
+DNA-PKc inhibitors	DNA-PKc inhibitor	NA	KU.0060648;PI.103	NA	NA
+AURK inhibitors	AURK inhibitor	NA	tozasertib	SL 0101.1;ZM.447439;BZ.795	NA
+HDAC inhibitors	HDAC inhibitor	Panobinostat	tubastatin.A;vorinostat	Vorinostat;LAQ824;MS.275	#444B42
+BCL2 inhibitors	BCL2 inhibitor	NA	ABT.737;gossypol;navitoclax;TW.37	ABT.263	NA
+imatinib	TKI	NA	NA	Imatinib	#B3F7C0
+ruxolitinib	JAK inhibitor	NA	NA	NA	NA
+panitumumab	EGFR antibody	NA	NA	NA	NA
+WEE1 inhibitors	WEE1 inhibitor	NA	MK.1775	681640	NA
+platinum	Alkylating agent	NA	NA	NA	NA
+ibrutinib	BTK inhibitor	NA	NA	NA	NA
+CDK4/6 inhibitors	CDK4/6 inhibitor	PD.0332991;PD0332991	alvocidib	PD.0332991	#C47A0C
+CDK2 inhibitors	CDK2 inhibitor	NA	BML.259;SNS.032;PHA.793887;dinaciclib;alvocidib	NA	#C47A0C
+PDL1 inhibitors	PDL1 inhibitor	NA	NA	NA	NA
+CDK2/4 inhibitors	CDK2/4 inhibitor	NA	BML.259	NA	#C47A0C	
+letrozole	Aromatase inhibitor	NA	NA	NA	NA
+daunorubicin	TOPII inhibitor	NA	idarubicin	NA	#C0C757
+anti-EGFR mAbs	anti-EGFR mAbs	NA	NA	NA	NA
+lapatinib	EGFR inhibitor	Lapatinib	lapatinib	Lapatinib	#D43608
+gefitinib	EGFR inhibitor	NA	NA	Gefitinib	#D43608
+sirolimus	mTOR inhibitor	NA	sirolimus	NA	#B2F0ED
+EPHA3 inhibitors	EPHA3 inhibitor	NA	NA	NA	NA
+neratinib	EGFR TKI	NA	neratinib	NA	#D43608
+trastuzumab	HER2 antibody	NA	NA	NA	NA
+pertuzumab	HER2 dimerization inhibitor	NA	NA	NA	NA
+ado-trastuzumab emtansine	HER2 antibody	NA	NA	NA	NA
+temsirolimus	mTOR inhibitor	NA	temsirolimus	Temsirolimus	#B2F0ED
+anti-HER3 mAbs	anti-HER3 mAbs	NA	NA	NA	NA
+anti-estrogens	anti-estrogen	NA	tamoxifen	NA	NA
+steroids in early setting	steroids in early setting	NA	NA	NA	NA
+anti-tubulin agents	anti-tubulin agent	Paclitaxel	ABT.751;CHM.1;CYT.997;paclitaxel	Paclitaxel;Vinblastine;Vinorelbine;Docetaxel;Epothilone B	#A198A0
+dovitinib	FGFR3 inhibitor	NA	NA	NA	NA
+pazopanib	TKI	NA	NA	Pazopanib	#B3F7C0
+bortezomib	Proteosome inhibitor	NA	bortezomib	Bortezomib	NA
+quizartinib	TKI	NA	NA	NA	#B3F7C0
+aromatase inhibitors	aromatase inhhibitor	NA	NA	NA	NA
+selumetinib	MEK inhibitor	AZD6244;selumetinib	selumetinib	AZD6244	#445C0F
+IDH1 inhibitor	IDH1 inhibitor	NA	NA	NA	NA
+IDH2 inhibitor	IDH2 inhibitor	NA	NA	NA	NA
+VEGFR inhibitors	VEGFR inhibitor	Sorafenib	tivozanib;sorafenib	Sorafenib;AMG.706;Axitinib;Pazopanib	#BB64A0
+sunitinib	RTK inhibitor	NA	NA	Sunitinib	NA
+regorafenib	RTK inhibitor	NA	NA	NA	NA
+gemcitabine	Nucleoside analogue	NA	gemcitabine	Gemcitabine	NA
+liposomal doxorubicin	Anthracycline antibiotic	NA	NA	NA	NA
+MDM2 inhibitors	MDM2 inhibitor	Nutlin.3	HLI.373;nutlin.3;RITA;serdemetan;SJ.172550	JNJ.26854165;Nutlin.3a	#914638
+MDM2/MDMX inhibitors	MDM2/MDMX inhibitor	Nutlin.3	HLI.373;nutlin.3;RITA;serdemetan;SJ.172550	JNJ.26854165;Nutlin.3a	#914638	
+rapamycin	mTOR inhibitor	NA	sirolimus	Rapamycin	#B2F0ED
+PIM inhibitors	PIM inhibitor	NA	NA	SL 0101.1	NA
+CDK7 inhibitors	CDK7 inhibitor	NA	NA	NA	NA
+bevacizumab	VEGF-A antibody	NA	NA	NA	NA
+Gamma secretase inhibitors	Gamma secretase inhibitor	L.685458	BMS.299897;L.685458	BMS.708163;Z.LLNIe.CHO	#BE378F
+ERK inhibitors	ERK inhibitor	NA	Compound.11e;pluripotin	NA	XMD8.85	NA
+pan-TRK inhibitor	pan-TRK inhibitor	Nilotinib;Sorafenib	sorefenib;nilotinib	Nilotinib;Sorafenib	NA
+midostaurin	Multi-target protein kinase inhibitor	NA	NA	Midostaurin	#FA6BEF
+Mytomycin C	Alkylating agent	NA	NA	Mitomycin C	NA
+PDGFR inhibitors	PDGFR inhibitor	Sorafenib	sorafenib	Pazopanib;Sorafenib;Sunitinib;Imitinib;Dasatinib;Axitinib;AMG.706	NA
+crenolanib	RTK inhibitor	NA	NA	NA	NA
+aspirin in adjuvant setting	aspirin in adjuvant setting	NA	NA	NA	NA
+ATRA	Retinoids	NA	ATRA	ATRA	NA
+arsenic trioxide	Toxin	NA	NA	NA	NA
+vismodegib	SMO inhibitor	NA	vismodegib	NA	NA
+sirolimus	mTOR inhibitor	NA	sirolimus	Rapamycin	#B2F0ED
+irinotecan plus CHK1/2 inhibitor in ATM deficient tumor	TOP inhibitor	Irinotecan;Topotecan	SN.38;topotecan	NA	#C0C757
+spliceosome inhibitor	spliceosome inhibitor	NA	NA	NA	NA
+SYK inhibitors	SYK inhibitor	NA	tamatinib	BAY 61.3606	#765729
+anthracyclines	anthracycline	NA	idarubicin	NA	NA
+carboplatin	Intercalating agent	NA	NA	NA	NA
+pramlintide	Peptide hormone	NA	NA	NA	NA
+BCR-ABL1 inhibitors	BCR-ABL1 inhibitor	NA	NA	GNF.2	NA
+novel estrogen receptor degrader	novel estrogen receptor degrader	NA	NA	NA	NA
+FLT3 inhibitors	FLT3 inhibitor	Sorafenib	sorafenib	Sorafenib;Sunitinib;VX.680;CEP.701	NA
+PKC412	Multi-target protein kinase inhibitor	NA	NA	Midostaurin	#FA6BEF
+BH3 mimetics	BH3 mimetic	NA	ABT.737	NA	NA
+foretinib	c-Met and VEGFR-2 inhibitor	NA	NA	NA	NA
+docetaxel	Microtubule dysregulation	NA	NA	Docetaxel	NA
+axitinib	TKI	NA	NA	Axitinib	#B3F7C0
+DOT1L inhibitors	DOT1L inhibitor	NA	NA	NA	NA
+phenformin	Anit-growth	NA	NA	NA	NA
+azacytidine	Nucleoside analogue	NA	NA	NA	NA
+proteosome inhibitors	proteosome inhibitor	NA	BMS.299897;NA	Bortezomib;MG.132	#BE378F
+lestaurtinib	TKI	NA	NA	NA	#B3F7C0
+BCL-XL inhibitors	BCL-XL inhibitor	NA	ABT.737;navitoclax;TW.37	Obatoclax Mesylate;TW 37;ABT.263	NA
+MET inhibitors	MET inhibitor	PHA.665752;PF2341066;crizotinib	PF.04217903;crizotinib	PF.02341066;PHA.665752	#D24A33
