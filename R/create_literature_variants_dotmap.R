@@ -86,12 +86,17 @@ create.literature.variants.dotmap <- function(
 			tmp
 		}
 		pvalues <- reformat.data.frames(hypothesis.results,'p.value');
+		literature <- reformat.data.frames(hypothesis.results, 'literature');
 		effect.size <- reformat.data.frames(hypothesis.results,'effect.size');
 
 		### ORDER PLOTTING DATA ###
 		# order by pvalues
 		max.effect.size <- apply(effect.size,2, function(x) {max(abs(x), na.rm = TRUE)});
 		effect.size <- effect.size[,order(
+			colSums(-log10(pvalues), na.rm = TRUE),
+			max.effect.size,
+			decreasing = TRUE)];
+		literature <- literature[,order(
 			colSums(-log10(pvalues), na.rm = TRUE),
 			max.effect.size,
 			decreasing = TRUE)];
@@ -104,6 +109,7 @@ create.literature.variants.dotmap <- function(
 		compounds.order <- unlist(compounds.order)
 
 		effect.size <- effect.size[compounds.order,];
+		literature	<- literature[compounds.order,];
 		pvalues 	<- pvalues[compounds.order,];
 
 		### SPOT COLOUR FUNCTION ###
@@ -218,11 +224,20 @@ create.literature.variants.dotmap <- function(
 				)
 			);
 
+		### CREATE HEATMAP ###
+		heatmap <- create.heatmap(
+			literature,
+			clustering.method = 'none',
+			colour.scheme = c('black','white'),
+			yaxis.lab = rep('', nrow(pvalues)),
+			grid.col = TRUE,
+			same.as.matrix = TRUE
+			)
+
 		### CREATE DOTMAP ###
-		create.dotmap(
+		dotmap <- create.dotmap(
 			x = effect.size,
 			bg.data = -log10(pvalues),
-			filename = filename,
 			spot.colour.function = spot.colour.function,
 			spot.size.function = spot.size.function,
 			pch = 21,
@@ -246,6 +261,23 @@ create.literature.variants.dotmap <- function(
 				expression(10^-4),
 				substitute(p.value<=10^-5, list(p.value = ''))
 				),
+			axis.bottom = 1.05,
+			bottom.padding = 4
+			)
+		### CREATE MULTIPLOT ###
+		create.multiplot(
+			list(
+				dotmap,
+				heatmap
+				),
+			filename = filename,
+			plot.layout = c(2,1),
+			panel.widths = c(2.5,1.5),
+			xaxis.cex = 0.8,
+			xaxis.rot = 90,
+			retrieve.plot.labels = TRUE,
+			print.new.legend = TRUE,
+			bottom.padding = 5,
 			legend = list(
 				right = list(
 					fun = right.grob
@@ -261,15 +293,11 @@ create.literature.variants.dotmap <- function(
 								cex = 1,
 								adj = 1
 								)
-					        )
+							)
 						),
 					x = x.legend,
 					y = y.legend
 					)
-				),
-			axis.bottom = 1.05,
-			bottom.padding = 4,
-			height = height,
-			width = width
+				) 
 			)
 	}
