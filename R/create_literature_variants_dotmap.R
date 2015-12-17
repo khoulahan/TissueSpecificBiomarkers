@@ -20,11 +20,9 @@ create.literature.variants.dotmap <- function(
 	map.drug.names, 
 	filename, 
 	dataset = 'CCLE', 
-	width = 5, 
+	width = 6, 
 	height = 6,
-	x.legend = -0.2,
-	y.legend = -0.28,
-	spot.size.function = function(x) { 0.5 + (1.2 * abs(x)) }
+	spot.size.function = function(x) { 0.5 + (1.1 * abs(x)) }
 	) {
 
 		# add dataset column 
@@ -164,6 +162,12 @@ create.literature.variants.dotmap <- function(
 				labels = as.character(map.drug.names[compounds.used,'CCLE']),
 				cex = 1,
 				title = 'Compounds'
+				),
+			legend = list(
+				colours = c('black','white','grey'),
+				labels = c('Literature','Non-Literature','N/A'),
+				cex = 1,
+				title = 'Literature Reported'
 				)
 			);
 
@@ -244,26 +248,17 @@ create.literature.variants.dotmap <- function(
 			bg.alpha = 1,
 			yaxis.lab = rep('', nrow(pvalues)),
 			colour.scheme = c('white','black'),
-			colourkey = TRUE,
+			colourkey = FALSE,
 			yaxis.cex = 0.5,
 			xaxis.cex = 1,
 			xaxis.rot = 90,
 			NA.spot.size = 1.5,
 			resolution = 500,
 			at = seq(0,5,1),
-			colourkey.cex = 0.9, 
-			colourkey.labels.at = seq(0,5,1),
-			colourkey.labels = c(
-				expression(10^0),
-				expression(10^-1),
-				expression(10^-2),
-				expression(10^-3),
-				expression(10^-4),
-				substitute(p.value<=10^-5, list(p.value = ''))
-				),
 			axis.bottom = 1.05,
 			bottom.padding = 4
 			)
+
 		### CREATE MULTIPLOT ###
 		create.multiplot(
 			list(
@@ -278,6 +273,8 @@ create.literature.variants.dotmap <- function(
 			retrieve.plot.labels = TRUE,
 			print.new.legend = TRUE,
 			bottom.padding = 5,
+			height = height,
+			width = width,
 			legend = list(
 				right = list(
 					fun = right.grob
@@ -286,17 +283,22 @@ create.literature.variants.dotmap <- function(
 					fun = dot.grob
 					),
 				inside = list(
-					fun = draw.key(
-						key = list(
-							text = list(
-								lab = 'FDR:',
-								cex = 1,
-								adj = 1
-								)
-							)
-						),
-					x = x.legend,
-					y = y.legend
+					fun = BoutrosLab.plotting.general::create.colourkey(
+						x = effect.size,
+						colour.scheme = c('white','black'),
+						colourkey.labels.cex = 0.9,
+						at = seq(0,5,1), 
+						colourkey.labels.at = seq(0,5,1),
+						colourkey.labels = c(
+							expression(10^0),
+							expression(10^-1),
+							expression(10^-2),
+							expression(10^-3),
+							expression(10^-4),
+							substitute(p.value<=10^-5, list(p.value = ''))
+							),
+						placement = viewport(just='left',x=0.5,y=-0.7,width=0.55)
+						)
 					)
 				) 
 			)
