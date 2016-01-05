@@ -31,7 +31,7 @@ extract.variant.multiple.datasets <- function(compound.dataset.grid, additional.
 			next;
 		}
 		if (!neighbour.variants) {
-			source('extract_biomarkers_drug_response.R')
+			source('../R/extract_biomarkers_drug_response.R')
 			# extract biomarker drug response for all drugs associated with BRAF and all three datasets
 			tmp <- extract.biomarkers.drug.response(
 				therapeutic.terms = therapeutic.terms, 
@@ -44,7 +44,7 @@ extract.variant.multiple.datasets <- function(compound.dataset.grid, additional.
 				additional.variant = additional.variant
 				);
 		} else {
-			source('extract_biomarkers_neighbour_drug_response.R')
+			source('../R/extract_biomarkers_neighbour_drug_response.R')
 			# extract biomarker drug response for all drugs associated with BRAF and all three datasets
 			tmp <- extract.biomarkers.neighbour.drug.response(
 				therapeutic.terms = therapeutic.terms, 

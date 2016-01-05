@@ -20,7 +20,7 @@ extract.biomarkers.neighbour.drug.response <- function(
 	dataset = 'CCLE'
 	) {
 		# find all variants associated with specified compound
-		source('find_associated_variants.R');
+		source('../R/find_associated_variants.R');
 		associated.biomarkers.variants <- find.associated.variants(
 			compound,
 			biomarkers = biomarkers,

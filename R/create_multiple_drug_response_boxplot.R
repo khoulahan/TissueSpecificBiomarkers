@@ -7,7 +7,7 @@
 ## xaxis.labels		labels of xaxis - drug names in alphabetical order
 ## width			width of plot
 ###################################################################################################
-create.multiple.drug.response.boxplot <- function(plot.data, filename, xaxis.labels, width) {
+create.multiple.drug.response.boxplot <- function(plot.data, filename, xaxis.labels, variant, width) {
 	# create group for plotting by combining tissue and variant information 
 	plot.data$group <- apply(
 		plot.data,
@@ -108,6 +108,7 @@ create.multiple.drug.response.boxplot <- function(plot.data, filename, xaxis.lab
 		filename = filename,
 		add.rectangle = add.rectangle,
 		add.stripplot = TRUE,
+		main = variant,
 		xright.rectangle = xright.rectangle,
 		xleft.rectangle = xleft.rectangle,
 		ybottom.rectangle = 0,

@@ -10,8 +10,6 @@ date <- Sys.Date();
 spec = matrix(c(
 	# required parameters
 	'literature',			'l',	1,	"character",
-	'compounds',			'c',	1,	"character",
-	'datasets',				't',	1,	"character",
 	'variant',				'v',	1,	"character",
 	'filename',				'f',	1,	"character",
 	'mutations.ccle',		'm',	2,	"character",
@@ -58,7 +56,9 @@ normalize.range <- function(x) {
 	(x - min.x)/(max.x - min.x);
 	}
 ## CCLE DATASET ###################################################################################
-if (!is.null(opt$mutations.ccle) {
+# generate vector of datasets to test 
+datasets <- c();
+if (!is.null(opt$mutations.ccle)) {
 	# read in mutation profile
 	mutations.ccle <- read.delim(
 		opt$mutations.ccle,
@@ -77,6 +77,8 @@ if (!is.null(opt$drug.response.ccle)) {
 	drug.response.ccle 	<- t(apply(drug.response.ccle, 1, normalize.range));
 	# because ccle is the area above the curve calculate 1 - the value
 	drug.response.ccle <- 1 - drug.response.ccle;
+	# add CCLE to datasets
+	datasets <- c(datasets, 'CCLE');
 }
 
 ## CGP DATASET ####################################################################################
@@ -96,6 +98,8 @@ if (!is.null(opt$mutations.cgp) & !is.null(opt$drug.response.cgp)) {
 	drug.response.cgp <- drug.response.cgp[!apply(drug.response.cgp, 1, function(x) {all(is.na(x))}),];
 	# normalize drug response
 	drug.response.cgp 	<- t(apply(drug.response.cgp, 1, normalize.range));
+	# add CGP to datasets
+	datasets <- c(datasets, 'CGP');
 } 
 
 ## CTDD DATASET ###################################################################################
@@ -111,13 +115,15 @@ if (!is.null(opt$drug.response.ctdd)) {
 	drug.response.ctdd <- drug.response.ctdd[!apply(drug.response.ctdd, 1, function(x) {all(is.na(x))}),];
 	# normalize drug response
 	drug.response.ctdd 	<- t(apply(drug.response.ctdd, 1, normalize.range));
+	# add CCLE to datasets 
+	datasets <- c(datasets,'CCLE');
 }
 
 ### EXTRACT VARIANTS ##############################################################################
 grid <- expand.grid(
 	c('AZD6244','Erlotinib','PD.0325901','PD.0332991','PLX4720','RAF265','L.685458',
 		'Lapatinib','Nutlin.3','Sorafenib','X17.AAG','Paclitaxel','Panobinostat','TKI258','Irinotecan'),
-	opt$datasets)
+	datasets)
 # extract variant information
 source("../R/extract_variant_multiple_datasets.R");
 plot.data <- extract.variant.multiple.datasets(grid, additional.variant = opt$additional.variant);
@@ -130,5 +136,6 @@ create.multiple.drug.response.boxplot(
 	file = opt$filename,
 	xaxis.labels = unique(plot.data[plot.data$gene == opt$variant,'compound'])[order(
 		as.character(unique(plot.data[plot.data$gene == opt$variant,'compound'])))],
+	variant = opt$variant,
 	width = 10
 	)
